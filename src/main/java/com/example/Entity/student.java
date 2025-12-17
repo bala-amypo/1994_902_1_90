@@ -1,14 +1,18 @@
 package com.example.project.Entity;
 
+import jakarta.persistence.Entity;
+import jakarta.presistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.id;
 
-import java.time.LocalDate;
-
-public class student{
-    private int id;
+@Entity
+public class studentEntity{
+    @id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Int id;
     private String name;
     private String email;
-    private LocalDate dob;
-    private flost cgpa;
+    public LocalDate dob;
 }
 public int getid(){
     return id;
