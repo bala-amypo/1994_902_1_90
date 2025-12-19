@@ -1,2 +1,4 @@
 package com.example.demo.controller;
-p
+public class TicketController{
+    
+}
