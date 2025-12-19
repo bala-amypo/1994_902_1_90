@@ -1,4 +1,4 @@
 package com.example.demo.Service;
-public class DuplicateRuleService{
+public class DuplicateDetectionService{
     
 }
