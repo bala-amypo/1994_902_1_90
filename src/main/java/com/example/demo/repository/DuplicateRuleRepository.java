@@ -1,1 +1,4 @@
-package com.example.demo.repo
+package com.example.demo.repository;
+public class DuplicateRuleRepository{
+
+}
