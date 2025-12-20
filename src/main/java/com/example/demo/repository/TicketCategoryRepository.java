@@ -1,4 +1,3 @@
-package com.example.demo.repository;
-public class TicketCategoryRepository{
-    
+public interface TicketCategoryRepository extends JpaRepository<TicketCategory, Long> {
+    boolean existsByCategoryName(String name);
 }

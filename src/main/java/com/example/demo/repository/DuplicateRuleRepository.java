@@ -1,4 +1,3 @@
-package com.example.demo.repository;
-public class DuplicateRuleRepository{
-
+public interface DuplicateRuleRepository extends JpaRepository<DuplicateRule, Long> {
+    DuplicateRule findByRuleName(String name);
 }
