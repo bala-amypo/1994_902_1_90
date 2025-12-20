@@ -1,4 +1,10 @@
 package com.example.demo.Service;
-public class DuplicateRuleService{
-    
+
+import com.example.demo.entity.DuplicateRule;
+import java.util.List;
+
+public interface DuplicateRuleService {
+    DuplicateRule createRule(DuplicateRule rule);
+    List<DuplicateRule> getAllRules();
+    DuplicateRule getRule(Long id);
 }
