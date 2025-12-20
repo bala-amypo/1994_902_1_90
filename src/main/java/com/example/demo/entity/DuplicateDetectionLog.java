@@ -24,7 +24,6 @@ public class DuplicateDetectionLog {
         detectedAt = LocalDateTime.now();
     }
 
-    // setters
     public void setTicket(Ticket ticket) { this.ticket = ticket; }
     public void setMatchedTicket(Ticket matchedTicket) { this.matchedTicket = matchedTicket; }
     public void setMatchScore(Double matchScore) { this.matchScore = matchScore; }

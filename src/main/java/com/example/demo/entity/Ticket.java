@@ -26,7 +26,6 @@ public class Ticket {
         createdAt = LocalDateTime.now();
     }
 
-    // getters & setters
     public Long getId() { return id; }
     public String getSubject() { return subject; }
     public String getDescription() { return description; }

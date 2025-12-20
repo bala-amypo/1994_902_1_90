@@ -22,7 +22,6 @@ public class DuplicateRule {
         createdAt = LocalDateTime.now();
     }
 
-    // getters
     public String getMatchType() { return matchType; }
     public Double getThreshold() { return threshold; }
 }
