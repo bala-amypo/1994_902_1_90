@@ -1,32 +1,45 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.TicketCategory;
-import com.example.demo.service.TicketCategoryService;
+import com.example.demo.entity.Ticket;
+import com.example.demo.service.TicketService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/categories")
-public class TicketCategoryController {
+@RequestMapping("/api/tickets")
+public class TicketController {
 
-    private final TicketCategoryService service;
+    private final TicketService service;
 
-    public TicketCategoryController(TicketCategoryService service) {
+    public TicketController(TicketService service) {
         this.service = service;
     }
 
-    @PostMapping
-    public TicketCategory create(@RequestBody TicketCategory category) {
-        return service.createCategory(category);
+    // CREATE TICKET
+    @PostMapping("/{userId}/{categoryId}")
+    public Ticket createTicket(
+            @PathVariable Long userId,
+            @PathVariable Long categoryId,
+            @RequestBody Ticket ticket) {
+        return service.createTicket(userId, categoryId, ticket);
     }
 
-    @GetMapping
-    public List<TicketCategory> all() {
-        return service.getAllCategories();
-    }
-
+    // GET TICKET BY ID
     @GetMapping("/{id}")
-    public TicketCategory get(@PathVariable Long id) {
-        return service.getCategory(id);
+    public Ticket getTicket(@PathVariable Long id) {
+        return service.getTicket(id);
+    }
+
+    // GET TICKETS BY USER
+    @GetMapping("/user/{userId}")
+    public List<Ticket> getByUser(@PathVariable Long userId) {
+        return service.getTicketsByUser(userId);
+    }
+
+    // GET ALL TICKETS
+    @GetMapping
+    public List<Ticket> getAllTickets() {
+        return service.getAllTickets();
     }
 }
