@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class DuplicateRule {
@@ -10,18 +9,12 @@ public class DuplicateRule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(nullable = false)
     private String ruleName;
 
-    private String matchType;
     private Double threshold;
-    private LocalDateTime createdAt;
 
     @PrePersist
-    public void onCreate() {
-        createdAt = LocalDateTime.now();
+    public void prePersist() {
     }
-
-    public String getMatchType() { return matchType; }
-    public Double getThreshold() { return threshold; }
 }

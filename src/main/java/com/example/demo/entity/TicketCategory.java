@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class TicketCategory {
@@ -11,20 +10,9 @@ public class TicketCategory {
     private Long id;
 
     @Column(unique = true)
-    private String categoryName;
-
-    private String description;
-
-    private LocalDateTime createdAt;
+    private String name;
 
     @PrePersist
-    public void onCreate() {
-        createdAt = LocalDateTime.now();
-    }
-
-    public Long getId() { return id; }
-    public String getCategoryName() { return categoryName; }
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void prePersist() {
     }
 }
