@@ -9,10 +9,13 @@ public class TicketCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    private String name;
+    private String categoryName;
 
-    @PrePersist
-    public void prePersist() {
+    public Long getId() {
+        return id;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
     }
 }
