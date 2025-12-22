@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/tickets")
-public class TicketController {
+public class TicketCategoryController {
 
     private final TicketService service;
 
