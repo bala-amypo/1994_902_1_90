@@ -1,59 +1,40 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.service.DuplicateDetectionService;
 import com.example.demo.entity.*;
 import com.example.demo.repository.*;
 import com.example.demo.util.TextSimilarityUtil;
-import org.springframework.stereotype.service;
-import java.util.*;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
-public class DuplicateDetectionServiceImpl
-        implements DuplicateDetectionService {
+public class DuplicateDetectionServiceImpl {
 
     private final TicketRepository ticketRepo;
-    private final DuplicateRuleRepository ruleRepo;
     private final DuplicateDetectionLogRepository logRepo;
 
-    public DuplicateDetectionServiceImpl(
-            TicketRepository ticketRepo,
-            DuplicateRuleRepository ruleRepo,
-            DuplicateDetectionLogRepository logRepo) {
+    public DuplicateDetectionServiceImpl(TicketRepository ticketRepo,
+                                         DuplicateDetectionLogRepository logRepo) {
         this.ticketRepo = ticketRepo;
-        this.ruleRepo = ruleRepo;
         this.logRepo = logRepo;
     }
 
-    public List<DuplicateDetectionLog> detectDuplicates(Long ticketId) {
+    public void detectDuplicates(Ticket ticket) {
+        List<Ticket> tickets = ticketRepo.findByStatus("OPEN");
 
-        Ticket ticket = ticketRepo.findById(ticketId)
-                .orElseThrow(() -> new RuntimeException("not found"));
+        for (Ticket t : tickets) {
+            double score = TextSimilarityUtil.similarity(
+                    ticket.getDescription(),
+                    t.getDescription()
+            );
 
-        List<DuplicateDetectionLog> logs = new ArrayList<>();
-
-        for (Ticket t : ticketRepo.findByStatus("OPEN")) {
-            if (!t.getId().equals(ticketId)) {
-                double score = TextSimilarityUtil.similarity(
-                        ticket.getDescription(), t.getDescription());
-
-                if (score >= 0.5) {
-                    DuplicateDetectionLog log = new DuplicateDetectionLog();
-                    log.setTicket(ticket);
-                    log.setMatchedTicket(t);
-                    log.setMatchScore(score);
-                    logs.add(logRepo.save(log));
-                }
+            if (score > 0.7) {
+                DuplicateDetectionLog log = new DuplicateDetectionLog();
+                log.setTicket(ticket);
+                log.setMatchedTicket(t);
+                log.setMatchScore(score);
+                logRepo.save(log);
             }
         }
-        return logs;
-    }
-
-    public List<DuplicateDetectionLog> getLogsForTicket(Long ticketId) {
-        return logRepo.findByTicket_Id(ticketId);
-    }
-
-    public DuplicateDetectionLog getLog(Long id) {
-        return logRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
     }
 }

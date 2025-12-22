@@ -9,8 +9,8 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
     private String description;
+    private String status;
 
     @ManyToOne
     private User user;
@@ -18,7 +18,19 @@ public class Ticket {
     @ManyToOne
     private TicketCategory category;
 
-    @PrePersist
-    public void prePersist() {
+    public Long getId() {
+        return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setCategory(TicketCategory category) {
+        this.category = category;
     }
 }

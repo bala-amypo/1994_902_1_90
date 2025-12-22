@@ -2,12 +2,10 @@ package com.example.demo.service.impl;
 
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.service.UserService;
-import org.springframework.stereotype.service;
-import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl {
 
     private final UserRepository repo;
 
@@ -15,19 +13,7 @@ public class UserServiceImpl implements UserService {
         this.repo = repo;
     }
 
-    public User registerUser(User user) {
-        if (repo.existsByEmail(user.getEmail())) {
-            throw new RuntimeException("email already exists");
-        }
+    public User save(User user) {
         return repo.save(user);
-    }
-
-    public User getUser(Long id) {
-        return repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
-    }
-
-    public List<User> getAllUsers() {
-        return repo.findAll();
     }
 }

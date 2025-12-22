@@ -13,11 +13,19 @@ public class DuplicateDetectionLog {
     private Ticket ticket;
 
     @ManyToOne
-    private DuplicateRule rule;
+    private Ticket matchedTicket;
 
-    private Double score;
+    private double matchScore;
 
-    @PrePersist
-    public void prePersist() {
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
+    }
+
+    public void setMatchedTicket(Ticket matchedTicket) {
+        this.matchedTicket = matchedTicket;
+    }
+
+    public void setMatchScore(double matchScore) {
+        this.matchScore = matchScore;
     }
 }
