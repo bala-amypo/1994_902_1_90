@@ -3,6 +3,6 @@ package com.example.demo.repository;
 import com.example.demo.entity.DuplicateRule;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface DuplicateRuleRepository extends JpaRepository<DuplicateRule, Long> {
-    DuplicateRule findByRuleName(String name);
+public interface DuplicateRuleRepository
+        extends JpaRepository<DuplicateRule, Long> {
 }

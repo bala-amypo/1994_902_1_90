@@ -1,6 +1,6 @@
-package com.example.demo.Service.Impl;
+package com.example.demo.service.impl;
 
-import com.example.demo.Service.DuplicateRuleService;
+import com.example.demo.service.DuplicateRuleService;
 import com.example.demo.entity.DuplicateRule;
 import com.example.demo.repository.DuplicateRuleRepository;
 import org.springframework.stereotype.Service;

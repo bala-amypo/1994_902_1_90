@@ -1,10 +1,10 @@
-package com.example.demo.Service.Impl;
+package com.example.demo.service.impl;
 
-import com.example.demo.Service.DuplicateDetectionService;
+import com.example.demo.service.DuplicateDetectionService;
 import com.example.demo.entity.*;
 import com.example.demo.repository.*;
 import com.example.demo.util.TextSimilarityUtil;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.service;
 import java.util.*;
 
 @Service

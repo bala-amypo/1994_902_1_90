@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class DuplicateDetectionLog {
@@ -14,17 +13,11 @@ public class DuplicateDetectionLog {
     private Ticket ticket;
 
     @ManyToOne
-    private Ticket matchedTicket;
+    private DuplicateRule rule;
 
-    private Double matchScore;
-    private LocalDateTime detectedAt;
+    private Double score;
 
     @PrePersist
-    public void onCreate() {
-        detectedAt = LocalDateTime.now();
+    public void prePersist() {
     }
-
-    public void setTicket(Ticket ticket) { this.ticket = ticket; }
-    public void setMatchedTicket(Ticket matchedTicket) { this.matchedTicket = matchedTicket; }
-    public void setMatchScore(Double matchScore) { this.matchScore = matchScore; }
 }

@@ -3,7 +3,7 @@ package com.example.demo.service.Impl;
 import com.example.demo.entity.*;
 import com.example.demo.repository.*;
 import com.example.demo.service.TicketService;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.service;
 import java.util.List;
 
 @Service
