@@ -1,7 +1,13 @@
-package com.example.demo.service.impl;
+package com.example.demo.service;
 
-import org.springframework.stereotype.Service;
+import com.example.demo.entity.DuplicateRule;
+import java.util.List;
 
-@Service
-public class DuplicateRuleServiceImpl {
+public interface DuplicateRuleService {
+
+    DuplicateRule save(DuplicateRule rule);
+
+    List<DuplicateRule> getAll();
+
+    DuplicateRule getById(Long id);
 }
