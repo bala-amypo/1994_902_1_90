@@ -23,15 +23,15 @@ public class TicketCategoryController {
     //     return service.createCategory(category);
     // }
 
-    // GET ALL CATEGORIES
-    @GetMapping
-    public List<TicketCategory> getAll() {
-        return service.getAllCategories();
-    }
+    // // GET ALL CATEGORIES
+    // @GetMapping
+    // public List<TicketCategory> getAll() {
+    //     return service.getAllCategories();
+    // }
 
-    // GET CATEGORY BY ID
-    @GetMapping("/{id}")
-    public TicketCategory getById(@PathVariable Long id) {
-        return service.getCategory(id);
-    }
+    // // GET CATEGORY BY ID
+    // @GetMapping("/{id}")
+    // public TicketCategory getById(@PathVariable Long id) {
+    //     return service.getCategory(id);
+    // }
 }
