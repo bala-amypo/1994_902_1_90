@@ -14,6 +14,7 @@ public class User {
 
     @Column(unique = true)
     private String email;
+    private LocalDateTime createdAt;
 
     public Long getId() {
         return id;
@@ -34,10 +35,19 @@ public class User {
         this.password=password;
     }
     public String getRole(){
-        return 
+        return role;
     }
-
+    public void setRole(String role){
+        this.role=role;
+    }
     public String getEmail() {
         return email;
     }
+    public void setEmail(String email){
+        this.email=email;
+    }
+    public String getCreatedAt(){
+        return cre
+    }
+    public User(Long id,String fullName,String email,String password,String role,)
 }
