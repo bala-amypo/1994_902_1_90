@@ -18,10 +18,10 @@ public class TicketCategoryController {
     }
 
     // CREATE CATEGORY
-    @PostMapping
-    public TicketCategory create(@RequestBody TicketCategory category) {
-        return service.createCategory(category);
-    }
+    // @PostMapping
+    // public TicketCategory create(@RequestBody TicketCategory category) {
+    //     return service.createCategory(category);
+    // }
 
     // GET ALL CATEGORIES
     @GetMapping
