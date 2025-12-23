@@ -10,11 +10,7 @@ import java.util.List;
 @RequestMapping("/api/users")
 public class UserController {
 
-    private final UserService service;
-
-    public UserController(UserService service) {
-        this.service = service;
-    }
+    @Autowired UserService service;
 
     // CREATE USER
     @PostMapping
