@@ -25,7 +25,16 @@ public class User {
         return fullName;
     }
     public void setFullName(){
-        this.
+        this.fullname=fullname;
+    }
+    public String getPassword(){
+        return password;
+    }
+    public void setPassword(String Password){
+        this.password=password;
+    }
+    public String getRole(){
+        return 
     }
 
     public String getEmail() {
