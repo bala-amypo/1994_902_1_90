@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class DuplicateDetectionLog {
@@ -10,22 +11,38 @@ public class DuplicateDetectionLog {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "ticket_id", nullable = false)
     private Ticket ticket;
 
     @ManyToOne
+    @JoinColumn(name = "matched_ticket_id")
     private Ticket matchedTicket;
 
-    private double matchScore;
+    private Double matchScore;
 
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
+    private LocalDateTime detectedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.detectedAt = LocalDateTime.now();
+        if (matchScore == null) {
+            this.matchScore = 0.0;
+        }
     }
 
-    public void setMatchedTicket(Ticket matchedTicket) {
-        this.matchedTicket = matchedTicket;
-    }
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setMatchScore(double matchScore) {
-        this.matchScore = matchScore;
-    }
+    public Ticket getTicket() { return ticket; }
+    public void setTicket(Ticket ticket) { this.ticket = ticket; }
+
+    public Ticket getMatchedTicket() { return matchedTicket; }
+    public void setMatchedTicket(Ticket matchedTicket) { this.matchedTicket = matchedTicket; }
+
+    public Double getMatchScore() { return matchScore; }
+    public void setMatchScore(Double matchScore) { this.matchScore = matchScore; }
+
+    public LocalDateTime getDetectedAt() { return detectedAt; }
+    public void setDetectedAt(LocalDateTime detectedAt) { this.detectedAt = detectedAt; }
 }
