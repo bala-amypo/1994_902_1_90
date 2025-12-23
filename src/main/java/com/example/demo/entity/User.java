@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import java.Time.*;
 
 @Entity
 public class User {
@@ -61,6 +62,6 @@ public class User {
         this.createdAt=createdAt;
     }
     public User(){
-        
+
     }
 }
