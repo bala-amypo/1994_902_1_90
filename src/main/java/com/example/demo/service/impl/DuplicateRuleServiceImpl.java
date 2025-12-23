@@ -1,13 +1,33 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import com.example.demo.entity.DuplicateRule;
+import com.example.demo.repository.DuplicateRuleRepository;
+import com.example.demo.service.DuplicateRuleService;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
-public interface DuplicateRuleService {
+@Service
+public class DuplicateRuleServiceImpl implements DuplicateRuleService {
 
-    DuplicateRule save(DuplicateRule rule);
+    private final DuplicateRuleRepository repository;
 
-    List<DuplicateRule> getAll();
+    public DuplicateRuleServiceImpl(DuplicateRuleRepository repository) {
+        this.repository = repository;
+    }
 
-    DuplicateRule getById(Long id);
+    @Override
+    public DuplicateRule save(DuplicateRule rule) {
+        return repository.save(rule);
+    }
+
+    @Override
+    public List<DuplicateRule> getAll() {
+        return repository.findAll();
+    }
+
+    @Override
+    public DuplicateRule getById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
 }
