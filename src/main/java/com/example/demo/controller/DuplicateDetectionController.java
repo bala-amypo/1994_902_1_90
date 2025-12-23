@@ -1,13 +1,10 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.DuplicateDetectionLog;
 import com.example.demo.service.DuplicateDetectionService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/duplicate-detection")
+@RequestMapping("/duplicate")
 public class DuplicateDetectionController {
 
     private final DuplicateDetectionService service;
@@ -16,21 +13,8 @@ public class DuplicateDetectionController {
         this.service = service;
     }
 
-    // RUN DUPLICATE CHECK FOR A TICKET
-    @PostMapping("/check/{ticketId}")
-    public List<DuplicateDetectionLog> detect(@PathVariable Long ticketId) {
-        return service.detectDuplicates(ticketId);
-    }
-
-    // GET LOGS FOR A TICKET
-    @GetMapping("/ticket/{ticketId}")
-    public List<DuplicateDetectionLog> getLogs(@PathVariable Long ticketId) {
-        return service.getLogsForTicket(ticketId);
-    }
-
-    // GET LOG BY ID
-    @GetMapping("/{id}")
-    public DuplicateDetectionLog getLog(@PathVariable Long id) {
-        return service.getLog(id);
+    @GetMapping("/{ticketId}")
+    public String check(@PathVariable Long ticketId) {
+        return service.checkDuplicate(ticketId);
     }
 }
