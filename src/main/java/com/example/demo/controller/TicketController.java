@@ -1,37 +1,40 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Ticket;
+import com.example.demo.model.Ticket;
 import com.example.demo.service.TicketService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+@Tag(name = "Tickets")
 @RestController
-@RequestMapping("/tickets")
+@RequestMapping("/api/tickets")
 public class TicketController {
+  private final TicketService service;
 
-    private final TicketService ticketService;
+  public TicketController(TicketService service) {
+    this.service = service;
+  }
 
-    public TicketController(TicketService ticketService) {
-        this.ticketService = ticketService;
-    }
+  @PostMapping("/{userId}/{categoryId}")
+  public ResponseEntity<Ticket> create(@PathVariable Long userId, @PathVariable Long categoryId,
+      @RequestBody Ticket t) {
+    return ResponseEntity.ok(service.createTicket(userId, categoryId, t));
+  }
 
-    @GetMapping
-    public List<Ticket> getAllTickets() {
-        return ticketService.getAllTickets();
-    }
+  @GetMapping("/user/{userId}")
+  public ResponseEntity<List<Ticket>> byUser(@PathVariable Long userId) {
+    return ResponseEntity.ok(service.getTicketsByUser(userId));
+  }
 
-    @GetMapping("/{id}")
-    public Ticket getTicket(@PathVariable Long id) {
-        return ticketService.getTicketById(id);
-    }
+  @GetMapping("/all")
+  public ResponseEntity<List<Ticket>> all() {
+    return ResponseEntity.ok(service.getAllTickets());
+  }
 
-    @PostMapping("/user/{userId}/category/{categoryId}")
-    public Ticket createTicket(
-            @PathVariable Long userId,
-            @PathVariable Long categoryId,
-            @RequestBody Ticket ticket) {
-
-        return ticketService.createTicket(userId, categoryId, ticket);
-    }
+  @GetMapping("/{id}")
+  public ResponseEntity<Ticket> get(@PathVariable Long id) {
+    return ResponseEntity.ok(service.getTicket(id));
+  }
 }
