@@ -1,43 +1,68 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "duplicate_rules", uniqueConstraints = { @UniqueConstraint(columnNames = "ruleName") })
 public class DuplicateRule {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+  @NotBlank
+  private String ruleName;
+  @NotBlank
+  private String matchType; // KEYWORD / SIMILARITY / EXACT_MATCH
+  private Double threshold = 0.8;
+  private LocalDateTime createdAt = LocalDateTime.now();
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  public DuplicateRule() {
+  }
 
-    @Column(unique = true, nullable = false)
-    private String ruleName;
+  public DuplicateRule(String ruleName, String matchType, Double threshold) {
+    this.ruleName = ruleName;
+    this.matchType = matchType;
+    this.threshold = threshold;
+  }
 
-    @Column(nullable = false)
-    private String matchType; // KEYWORD / SIMILARITY / EXACT_MATCH
+  public Long getId() {
+    return id;
+  }
 
-    private Double threshold;
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    private LocalDateTime createdAt;
+  public String getRuleName() {
+    return ruleName;
+  }
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
+  public void setRuleName(String ruleName) {
+    this.ruleName = ruleName;
+  }
 
-    // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+  public String getMatchType() {
+    return matchType;
+  }
 
-    public String getRuleName() { return ruleName; }
-    public void setRuleName(String ruleName) { this.ruleName = ruleName; }
+  public void setMatchType(String matchType) {
+    this.matchType = matchType;
+  }
 
-    public String getMatchType() { return matchType; }
-    public void setMatchType(String matchType) { this.matchType = matchType; }
+  public Double getThreshold() {
+    return threshold;
+  }
 
-    public Double getThreshold() { return threshold; }
-    public void setThreshold(Double threshold) { this.threshold = threshold; }
+  public void setThreshold(Double threshold) {
+    this.threshold = threshold;
+  }
 
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
 }
