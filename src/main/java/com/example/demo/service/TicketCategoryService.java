@@ -1,14 +1,12 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.TicketCategory;
-
+import com.example.demo.model.TicketCategory;
 import java.util.List;
 
 public interface TicketCategoryService {
+  TicketCategory createCategory(TicketCategory category);
 
-    TicketCategory save(TicketCategory category);
+  List<TicketCategory> getAllCategories();
 
-    List<TicketCategory> getAll();
-
-    TicketCategory getById(Long id);
+  TicketCategory getCategory(Long id);
 }
