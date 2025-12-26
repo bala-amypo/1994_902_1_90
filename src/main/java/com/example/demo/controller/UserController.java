@@ -1,32 +1,34 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.User;
+import com.example.demo.model.User;
 import com.example.demo.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
+@Tag(name = "Users")
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
+  private final UserService service;
 
-    @Autowired UserService service;
+  public UserController(UserService service) {
+    this.service = service;
+  }
 
-    // CREATE USER
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return service.registerUser(user);
-    }
+  @PostMapping("/register")
+  public ResponseEntity<User> register(@RequestBody User u) {
+    return ResponseEntity.ok(service.registerUser(u));
+  }
 
-    // GET USER BY ID
-    @GetMapping("/{id}")
-    public User getUser(@PathVariable Long id) {
-        return service.getUser(id);
-    }
+  @GetMapping("/all")
+  public ResponseEntity<List<User>> all() {
+    return ResponseEntity.ok(service.getAllUsers());
+  }
 
-    // GET ALL USERS
-    @GetMapping
-    public List<User> getAllUsers() {
-        return service.getAllUsers();
-    }
+  @GetMapping("/{id}")
+  public ResponseEntity<User> get(@PathVariable Long id) {
+    return ResponseEntity.ok(service.getUser(id));
+  }
 }

@@ -1,37 +1,34 @@
-
 package com.example.demo.controller;
 
-import com.example.demo.entity.TicketCategory;
+import com.example.demo.model.TicketCategory;
 import com.example.demo.service.TicketCategoryService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+@Tag(name = "Ticket Categories")
 @RestController
 @RequestMapping("/api/categories")
 public class TicketCategoryController {
+  private final TicketCategoryService service;
 
-    private final TicketCategoryService service;
+  public TicketCategoryController(TicketCategoryService service) {
+    this.service = service;
+  }
 
-    public TicketCategoryController(TicketCategoryService service) {
-        this.service = service;
-    }
+  @PostMapping
+  public ResponseEntity<TicketCategory> create(@RequestBody TicketCategory c) {
+    return ResponseEntity.ok(service.createCategory(c));
+  }
 
-    // CREATE CATEGORY
-    // @PostMapping
-    // public TicketCategory create(@RequestBody TicketCategory category) {
-    //     return service.createCategory(category);
-    // }
+  @GetMapping
+  public ResponseEntity<List<TicketCategory>> all() {
+    return ResponseEntity.ok(service.getAllCategories());
+  }
 
-    // // GET ALL CATEGORIES
-    // @GetMapping
-    // public List<TicketCategory> getAll() {
-    //     return service.getAllCategories();
-    // }
-
-    // // GET CATEGORY BY ID
-    // @GetMapping("/{id}")
-    // public TicketCategory getById(@PathVariable Long id) {
-    //     return service.getCategory(id);
-    // }
+  @GetMapping("/{id}")
+  public ResponseEntity<TicketCategory> get(@PathVariable Long id) {
+    return ResponseEntity.ok(service.getCategory(id));
+  }
 }

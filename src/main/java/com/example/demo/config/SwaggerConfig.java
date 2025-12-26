@@ -1,9 +1,13 @@
 package com.example.demo.config;
 
+import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import java.util.List;
 
 @Configuration
@@ -11,10 +15,26 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI customOpenAPI() {
+
+        // JWT Bearer Security Scheme
+        SecurityScheme bearerScheme = new SecurityScheme()
+                .type(SecurityScheme.Type.HTTP)
+                .scheme("bearer")
+                .bearerFormat("JWT");
+
         return new OpenAPI()
-                // You need to change the port as per your server
+                // API Information
+                .info(new Info()
+                        .title("Complaint Duplicate Detector API")
+                        .version("1.0"))
+
+                // Server Configuration
                 .servers(List.of(
                         new Server().url("https://9009.408procr.amypo.ai")
-                ));
-        }
+                ))
+
+                // Security Configuration
+                .components(new Components()
+                        .addSecuritySchemes("bearer-jwt", bearerScheme));
+    }
 }

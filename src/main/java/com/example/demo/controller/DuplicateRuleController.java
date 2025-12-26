@@ -1,33 +1,34 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.DuplicateRule;
+import com.example.demo.model.DuplicateRule;
 import com.example.demo.service.DuplicateRuleService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+@Tag(name = "Duplicate Rules")
 @RestController
-@RequestMapping("/rules")
+@RequestMapping("/api/rules")
 public class DuplicateRuleController {
+  private final DuplicateRuleService service;
 
-    private final DuplicateRuleService service;
+  public DuplicateRuleController(DuplicateRuleService service) {
+    this.service = service;
+  }
 
-    public DuplicateRuleController(DuplicateRuleService service) {
-        this.service = service;
-    }
+  @PostMapping
+  public ResponseEntity<DuplicateRule> create(@RequestBody DuplicateRule r) {
+    return ResponseEntity.ok(service.createRule(r));
+  }
 
-    @PostMapping
-    public DuplicateRule create(@RequestBody DuplicateRule rule) {
-        return service.save(rule);
-    }
+  @GetMapping
+  public ResponseEntity<List<DuplicateRule>> all() {
+    return ResponseEntity.ok(service.getAllRules());
+  }
 
-    @GetMapping
-    public List<DuplicateRule> getAll() {
-        return service.getAll();
-    }
-
-    @GetMapping("/{id}")
-    public DuplicateRule getById(@PathVariable Long id) {
-        return service.getById(id);
-    }
+  @GetMapping("/{id}")
+  public ResponseEntity<DuplicateRule> get(@PathVariable Long id) {
+    return ResponseEntity.ok(service.getRule(id));
+  }
 }
