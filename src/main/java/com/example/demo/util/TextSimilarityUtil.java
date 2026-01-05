@@ -16,3 +16,11 @@ public class TextSimilarityUtil {
     return (double) inter.size() / (double) total;
   }
 }
+
+
+package com.example.demo.util;
+
+public  class TextSimilarityUtil.java;
+public static double similarity(String a,String b){
+  
+}
